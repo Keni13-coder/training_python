@@ -2,7 +2,7 @@
 import random
 from typing import Callable
 import json
-from decor_les_9 import *
+from my_decorators import *
 from pathlib import Path
 import csv
 import numpy as np

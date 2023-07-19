@@ -1,5 +1,5 @@
 import random
-import decor_les_9
+import my_decorators
 
 
 __all__ = ['guess']
@@ -7,9 +7,9 @@ __all__ = ['guess']
 
 
 
-@decor_les_9.decor_seved_json.write_json('Test_les_9')   
-@decor_les_9.decor_count.count(2)
-@decor_les_9.decor_range.decor_range_namber
+@my_decorators.decor_seved_json.write_json('Test_les_9')   
+@my_decorators.decor_count.count(2)
+@my_decorators.decor_range.decor_range_namber
 def guess(num: int , num_count: int )-> bool:
     START_RANGE = 1
     END_RANGE = 100
