@@ -306,7 +306,7 @@ class Matrix:
 
 
     def __rmul__(self, __other):
-        'Отрабатывает когда матрица слева, а экземпляр с права'
+        '''Отрабатывает когда матрица слева, а экземпляр с права'''
         if self.__compare(self._matrix, __other):
             if str(self) == str(__other):
                 start = [[x[i] * y[i] for i,v in enumerate(x) ] for (x,y) in zip(self._matrix, __other) ]
@@ -315,6 +315,5 @@ class Matrix:
     
     
 
-  
 
 
