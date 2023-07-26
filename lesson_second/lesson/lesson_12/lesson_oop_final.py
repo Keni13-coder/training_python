@@ -198,8 +198,9 @@ class Factorial:
     def __enter__(self): 
         self.file = open('lesson_second\lesson\lesson_12\Factorial.json','w',encoding='utf-8')
         json.dump(self.full_info, self.file, ensure_ascii=False, indent=2)
-
         return self
+    
+    
     def __exit__(self,exc_type, exc_val, exc_tb):
         self.file.close()
 
@@ -434,4 +435,6 @@ class Rectangle:
 ○ Также экземпляр должен сообщать средний балл по тестам для каждого 
 предмета и по оценкам всех предметов вместе взятых.
 '''
+
+
 
