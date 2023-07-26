@@ -152,6 +152,7 @@ from typing import Any
 from itertools import islice
 import json
 
+
 '''
 Задание №1
 Создайте класс-функцию, который считает факториал числа при
@@ -262,14 +263,44 @@ class GenerFactorial:
 прямоугольника и встройте контроль недопустимых значений
 (отрицательных).
 Используйте декораторы свойств.
-
+Задание №5
+Доработаем прямоугольник и добавим экономию памяти
+для хранения свойств экземпляра без словаря __dict__
+Задание №6
+Изменяем класс прямоугольника.
+Заменяем пару декораторов проверяющих длину и ширину
+на дескриптор с валидацией размера.
 '''
+class Positive:
+    def __init__(self, num: int = 0) -> None:
+        self.num = num
 
+    def __set_name__(self, owner, name):
+        self.param_name = f'_{name}'
 
+    def __get__(self, instance, owner):
+        return getattr(instance,self.param_name)
+    
+    def __set__(self, instance, value):
+        if self.__validation(value):
+            setattr(instance,self.param_name,value)
+        else:
+            raise ValueError('Число не может быть меньше 0')    
+    
+    @staticmethod
+    def __validation(value) -> bool:
+        if value < 0:
+            return False
+        return True
 
 
 class Rectangle:
     '''Класс для подсчёта периметра и площади прямоугольника'''
+    __slots__ = ['_length', '_width']
+    length = Positive()
+    width = Positive()
+    
+    
     def __init__(self, length, width=0) -> None:
         self.length = length
         if not width:
@@ -349,14 +380,58 @@ class Rectangle:
         """Предстовление класса"""
         return   f'Rectangle(lengt = {self.length}, width = {self.width})'
     
-class Test:
-    def __new__(cls,num):
-        instance = super().__new__(cls)
-        instance.lis = [x for x in range(num)]
-        return instance.lis
-    def __init__(self,num) -> None:
-        self.num = num
+    # @property
+    # def length(self):
+    #     return self.length
+    
+    
+    # @length.setter
+    # def length(self,value):
+    #     if value < 0:
+    #         raise ValueError('Число не может быть меньше 0')
+    #     self.length = value
+        
+      
+    # @property
+    # def width(self):
+    #     return self.width
+    
+    
+    # @width.setter
+    # def width(self,value):
+    #     if value < 0:
+    #         raise ValueError('Число не может быть меньше 0')
+    #     self.width = value
+
+    
+    
+
+                
+
+    
+# class Test:
+#     def __new__(cls,num):
+#         instance = super().__new__(cls)
+#         instance.lis = [x for x in range(num)]
+#         return instance.lis
+#     def __init__(self,num) -> None:
+#         self.num = num
         
         
         
-print(help(zip))        
+# d = Rectangle(2,2)
+
+# print(d.perimeter_rectangle()) 
+
+'''
+Создайте класс студента. 
+○ Используя дескрипторы проверяйте ФИО на первую заглавную букву и 
+наличие только букв. 
+○ Названия предметов должны загружаться из файла CSV при создании 
+экземпляра. Другие предметы в экземпляре недопустимы. 
+○ Для каждого предмета можно хранить оценки (от 2 до 5) и результаты 
+тестов (от 0 до 100). 
+○ Также экземпляр должен сообщать средний балл по тестам для каждого 
+предмета и по оценкам всех предметов вместе взятых.
+'''
+
