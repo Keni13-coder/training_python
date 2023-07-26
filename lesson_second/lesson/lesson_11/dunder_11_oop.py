@@ -257,18 +257,20 @@ class Matrix:
                 
     def __add__(self, __other: object):
         '''сложение эксемпляров класса Matrix с матрицой'''
-        if self.__compare(self._matrix,__other):
-            return self._matrix + __other
-        else:
-            return []
+        if self.__compare(self._matrix, __other):
+            if str(self) == str(__other):
+                start = [[x[i] + y[i] for i,v in enumerate(x) ] for (x,y) in zip(self._matrix, __other) ]
+            return start
+        return []
 
     
     def __radd__(self, __other: object):
         '''сложение матрицы с  эксемпляром класса Matrix'''
-        if self.__compare(self._matrix,__other):
-            return self._matrix + __other
-        else:
-            return []
+        if self.__compare(self._matrix, __other):
+            if str(self) == str(__other):
+                start = [[x[i] + y[i] for i,v in enumerate(x) ] for (x,y) in zip(self._matrix, __other) ]
+            return start
+        return [] 
     
     
     def __eq__(self, __other: object) -> bool:
