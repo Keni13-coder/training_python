@@ -98,6 +98,7 @@ class Exam:
 
 
 class Student:
+    '''Высчитывает средние балы студента'''
     full_name = TestFullName()
     grade = Grade()
     exam = Exam()
@@ -109,6 +110,7 @@ class Student:
     
     @staticmethod
     def __create_csv(path: str='lesson_second\home_lesson\Home_12'):
+        '''Создание csv файла с предметами '''
         start_subject = ['астрономия',
             'художественная литература',
             'этикет',
@@ -117,11 +119,11 @@ class Student:
             'риторика',
             'психология']
         with open(f'{path}\subject.csv','w',encoding='utf-8',newline='') as file:
-
             writer = csv.writer(file)
             writer.writerows([start_subject])
     
-    def __call__(self, subject, exam,grade ) -> Any:
+    def __call__(self, subject: str, exam: int, grade: int ) -> Any:
+        '''Вызываеться у эксезпляра класса и позволят добовлять exam, grade в итог'''
         self.grade = grade
         self.exam = exam
         with open('lesson_second\home_lesson\Home_12\subject.csv','r',encoding='utf-8',newline='') as file:
@@ -136,30 +138,29 @@ class Student:
                 raise ValueError('Данного предмета не существует')
     @property  
     def results_dict(self):
+        '''Результаты выполнения работ, среднее значение'''
         resul  = {f'{k} : {key} = {sum(value) / len(value)}' for k,v in self.__results_dict.items() for key,value in v.items()}
         full_resul = {k: sum(lis := sum(v.values(), [])) / len(lis)  for k,v in self.__results_dict.items() }
-        return f'{resul}\n{full_resul}'
+        return f'Студент - {self._full_name}:\n{resul}\n{full_resul}'
     
     
+    def __repr__(self) -> str:
+        return f'Student({self._full_name})'
+    
 
-# d = Student('asd')
-rez = {'exam': {'астрономия': 5,'художественная литература': 3,},
-      'grade': {'вастрономия': 4,'дизайн': 2}}
+    def __str__(self) -> str:
+        return "< class 'Student' >"
 
-# rez_exam = defaultdict(list)
-# for k,v in rez.items():
-#     for key,value in v.items():
-#             if k == 'exam':
-#                 print(f"{key}: {value}")
-#                 rez_exam[key].append(value)
-# print(rez_exam)
-# # продумать реализацию нахождения среднего значения всех тестов для каждого предмета и всех оценок 
-d = Student('Вsf')
 
-d('астрономия',3,5)
-d('астрономия',100,2)
-d('астрономия',5,4)
-d('художественная литература',4,5)
-print(d.results_dict)
-# d = {'d':1,'p':2,'t':10}
-# print(sum(d.values()))
+
+
+
+if __name__ == '__main__':
+    d = Student('Влад Молдованов Сергеевич')
+
+    d('астрономия',3,5)
+    d('астрономия',100,2)
+    d('астрономия',5,4)
+    d('художественная литература',4,5)
+    print(d.results_dict)
+    print(repr(d))
