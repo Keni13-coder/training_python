@@ -1,0 +1,51 @@
+doctest
+doctest - пишиться в документации следующим образом
+''' документация
+>>> funk()
+resul 
+'''
+таким образом мы показываем при каких входящих данных будет вывод
+import doctest
+doctest.testmod(verbose=False) - делает тесты, если указать True покажет результаты тестов
+doctest.testfile(filename, verbose=False) - делает тесты из файла, если указать True покажет результаты тестов
+
+unittest
+создается класс наследованный от unittest.TestCase
+class TestIsTest(unittest.TestCase)
+
+в классе создаються кейсы(методы класса) начало у таких кейсов всегда test
+assertEqual(функционал, что получается , msg= в случае не соответсвия)
+assertRaises(тип ошибки, функция, аргумент передаваемый в функцию) - проверет на ошибку
+assertFalse(funk(args)) - проверяет на выход False 
+assertTrue(funk(args)) - проверяет на выход True
+def setUp(self) - выполняеться для каждого теста с 0
+def tearDown(self) - выполняеться после setUp и теста, не важнен рузультат, будет выполнен tearDown
+
+
+pytest
+файл должен начинаться с test
+создаем функции с начальным именем test_name дальше наше имя
+например: 
+def test_number:
+    assert isistance(number,int), type(number) не int
+
+with pytest.raises(Erorr, match= текст который может быть) - вызываем контекст ошибки от pytest
+    проверка которая может вызвать ошибку
+
+проверка на вывод в консоли например в вашей проверочной функции есть print который что-то выводит чтобы его проверить используем конструкцию
+def test_name(capdf)
+    captured = capdf.readoutter() - принемает то что выдоло бы консоль
+    asser captured == ваш текст из print
+
+
+запуск теста 
+pytest.main(['-v']) - флаг v говорит о полной инфе
+
+@pytest.fixture - аналог setUp и tearDown
+def data()
+    return [1,2,3]
+
+def test(data)
+    и так мы говорим что мы пользуемся фикстурой
+
+могут быть вложенные фикстуры    
