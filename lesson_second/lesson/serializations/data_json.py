@@ -5,14 +5,19 @@ import os
 __all__ = ['create_data_js']
 
 def create_data_js(end_file=os.getcwd())-> None:
+    if not os.path.isdir(f'{end_file}\Test_file'):
+        os.makedirs(f'{end_file}\Test_file')
+        with open(f'{end_file}\Test_file\\test.json','w',encoding='utf-8') as f:
+            pass
+
     while True:
         end = input('Для выхода введите exit или enter чтобы продолжить: ')
         if 'exit' == end:
             break
         name = input('Введите имя: ')
         id_ = input('Введите id: ')
-        level = input('Введите уровень доступа: ')
-
+        level = min(input('Введите уровень доступа: '),'7',key=int)
+        
         with open(f'{end_file}\Test_file\\test.json','r+',encoding='utf-8') as f:
             try:
                 read_ : dict = json.load(f)
@@ -30,3 +35,5 @@ def create_data_js(end_file=os.getcwd())-> None:
                 
             with open(f'{end_file}\Test_file\\test.json','w+',encoding='utf-8') as rezul:
                 json.dump(read_,rezul,ensure_ascii=False,indent=2,sort_keys=True)
+                
+create_data_js()
