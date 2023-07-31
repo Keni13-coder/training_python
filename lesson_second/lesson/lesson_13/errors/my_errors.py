@@ -1,4 +1,4 @@
-__all__ = ['LevelError','AccessError']
+__all__ = ['LevelError','AccessError','RangeError','NameError','LessThanZero']
 
 
 

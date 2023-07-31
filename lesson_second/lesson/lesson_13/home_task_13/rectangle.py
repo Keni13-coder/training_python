@@ -1,11 +1,13 @@
-from errors import my_errors as er
+import sys
+sys.path.append('../..')
+from lesson_13.errors.my_errors import LessThanZero
 
 
 class Rectangle:
     '''Класс для подсчёта периметра и площади прямоугольника'''
     def __init__(self, length, width=0) -> None:
         if length < 0 or width < 0:
-            raise er.LessThanZero()
+            raise LessThanZero()
         self.length = length
         if not width:
             width = length
@@ -83,3 +85,11 @@ class Rectangle:
     def __repr__(self) -> str:
         """Предстовление класса"""
         return   f'Rectangle(lengt = {self.length}, width = {self.width})'
+    
+    
+match __name__:
+    case '__main__':
+        import sys
+        import os
+        sys.path.append(os.path.join(os.getcwd(),'..'))
+        from errors.my_errors import *

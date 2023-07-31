@@ -1,14 +1,3 @@
-'''
-Создайте класс студента. 
-○ Используя дескрипторы проверяйте ФИО на первую заглавную букву и 
-наличие только букв. 
-○ Названия предметов должны загружаться из файла CSV при создании 
-экземпляра. Другие предметы в экземпляре недопустимы. 
-○ Для каждого предмета можно хранить оценки (от 2 до 5) и результаты 
-тестов (от 0 до 100). 
-○ Также экземпляр должен сообщать средний балл по тестам для каждого 
-предмета и по оценкам всех предметов вместе взятых.
-'''
 import csv
 from collections import defaultdict
 from typing import Any
@@ -126,7 +115,7 @@ class Student:
         '''Вызываеться у эксезпляра класса и позволят добовлять exam, grade в итог'''
         self.grade = grade
         self.exam = exam
-        with open('..\Home_12\subject.csv','r',encoding='utf-8',newline='') as file:
+        with open('D:\Repository\\training_python\lesson_second\home_lesson\Home_14\\files_py\subject.csv','r',encoding='utf-8',newline='') as file:
             if subject in file.read():
                 try:
                     self.__results_dict['exam'][subject].append(exam)
@@ -141,7 +130,7 @@ class Student:
         '''Результаты выполнения работ, среднее значение'''
         resul  = {f'{k} : {key} = {sum(value) / len(value)}' for k,v in self.__results_dict.items() for key,value in v.items()}
         full_resul = {k: sum(lis := sum(v.values(), [])) / len(lis)  for k,v in self.__results_dict.items() }
-        return f'Студент - {self._full_name}:\n{resul}\n{full_resul}'
+        return f'Студент - {self._full_name}:\n{sorted(resul)}\n{full_resul}'
     
     
     def __repr__(self) -> str:
@@ -156,11 +145,5 @@ class Student:
 
 
 if __name__ == '__main__':
-    d = Student('Влад Молдованов Сергеевич')
-
-    d('астрономия',3,5)
-    d('астрономия',100,2)
-    d('астрономия',5,4)
-    d('художественная литература',4,5)
-    print(d.results_dict)
-    print(repr(d))
+    data = Student('Бочкин Cергей Бритьевич')
+    print(data == "< class 'Student' >")
